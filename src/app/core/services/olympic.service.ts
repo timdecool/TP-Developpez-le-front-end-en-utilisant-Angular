@@ -56,9 +56,37 @@ export class OlympicService {
     )
   }
 
-  public countryIdByIndex(index: number) {
+  public countryIdByIndex(index: number): number {
     return this._olympics$.value[index]?.id || 0;
   }
 
+  public getCountryById(id: number): Olympic|undefined {
+    return this._olympics$.value?.find((olympic: Olympic) => olympic.id === id);
+  }
 
+  public getNumberOfParticipationsByCountry(id: number): number {
+    return this.getCountryById(id)?.participations.length || 0;
+  }
+
+  public getCountryNameByCountry(id: number): string {
+    return this.getCountryById(id)?.country || "Not found";
+  }
+
+  public getNumberOfMedalsByCountry(id: number): number {
+    return this.getCountryById(id)?.participations.reduce(
+      (sum: number, participation: Participation): number => sum + participation.medalsCount, 0) || 0;
+  }
+
+  public getNumberOfAthletesByCountry(id: number): number {
+    return this.getCountryById(id)?.participations.reduce(
+      (sum: number, participation: Participation): number => sum + participation.athleteCount, 0) || 0;
+  }
+
+  public getNumberOfMedalsByGameByCountry(id: number): number[] {
+    return this.getCountryById(id)?.participations.map((participation:Participation): number => participation.medalsCount) || [];
+  }
+
+  public getParticipationYearsByCountry(id: number): number[] {
+    return this.getCountryById(id)?.participations.map((participation:Participation): number => participation.year) || [];
+  }
 }
