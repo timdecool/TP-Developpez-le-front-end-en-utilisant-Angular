@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div class="container text-roboto">
+  @if(isLoading$ | async) {
+    <app-page-header [title]="'Loading...'" />
+  }
+  @else {
+    <router-outlet></router-outlet>
+  }
+  <app-error-banner [message]="errorMessage$ | async"/>
+</div>
+

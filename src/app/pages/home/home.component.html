@@ -1,3 +1,13 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+
+<app-page-header [title]="'Medals per Country'" />
+<app-stat-card-list [statList]="statList" />
+
+<!-- Pie diagram: medals per country -->
+<div class="container">
+  <canvas
+    baseChart
+    [data]="chartData"
+    [options]="pieChartOptions"
+    [type]="'pie'"
+  ></canvas>
+</div>

@@ -1,0 +1,15 @@
+.stat-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .stat-card-list {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    padding: 10px;
+  }
+}
