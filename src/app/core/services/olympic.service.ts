@@ -33,7 +33,7 @@ export class OlympicService {
 
   public getNumberOfGames(): number {
     const gameYears : number[] = [];
-    this._olympics$.value.forEach(
+    this._olympics$.value?.forEach(
       (olympic: Olympic) => olympic.participations.forEach(
         (participation: Participation) => gameYears.push(participation.year)
       )
@@ -42,22 +42,22 @@ export class OlympicService {
   }
 
   public getCountries(): string[] {
-    return this._olympics$.value.map((olympic: Olympic) => olympic.country);
+    return this._olympics$.value?.map((olympic: Olympic) => olympic.country);
   }
 
   public getNumberOfCountries(): number {
-    return this._olympics$.value.length;
+    return this._olympics$.value?.length;
   }
 
   public getMedals(): number[] {
-    return this._olympics$.value.map(
+    return this._olympics$.value?.map(
       (olympic: Olympic) => olympic.participations.reduce(
         (sum: number, participation: Participation) => sum + participation.medalsCount, 0)
     )
   }
 
   public countryIdByIndex(index: number) {
-    return this._olympics$.value[index].id;
+    return this._olympics$.value[index]?.id || 0;
   }
 
 

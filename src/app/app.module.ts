@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {BaseChartDirective, provideCharts, withDefaultRegisterables} from 'ng2-charts';
+import {StatCardListComponent} from "./components/stat-card-list/stat-card-list.component";
+import {PageHeaderComponent} from "./components/page-header/page-header.component";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BaseChartDirective],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BaseChartDirective, StatCardListComponent, PageHeaderComponent],
   providers: [
     provideCharts(withDefaultRegisterables())
   ],
