@@ -5,9 +5,6 @@ import {tap} from "rxjs/operators";
 import {Stat} from "../../core/models/Stat";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OlympicService} from "../../core/services/olympic.service";
-import {PageHeaderComponent} from "../../components/page-header/page-header.component";
-import {StatCardListComponent} from "../../components/stat-card-list/stat-card-list.component";
-import {BaseChartDirective} from "ng2-charts";
 
 @Component({
   selector: 'app-details',

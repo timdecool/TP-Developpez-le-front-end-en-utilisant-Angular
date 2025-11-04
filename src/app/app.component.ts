@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
 
   protected olympicService = inject(OlympicService);
   protected isLoading$ !: Observable<boolean>;
-  // protected error$ !: Observable<boolean>;
   protected errorMessage$ !: Observable<string|null>;
 
   ngOnInit(): void {

@@ -1,5 +1,5 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {Observable, of, Subject, takeUntil} from 'rxjs';
+import {Subject, takeUntil} from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import {ChartConfiguration, ChartData, ChartEvent} from "chart.js";
 import {Router} from "@angular/router";
