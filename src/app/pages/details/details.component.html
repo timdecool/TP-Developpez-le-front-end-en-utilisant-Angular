@@ -1,1 +1,12 @@
-<p>details works!</p>
+<app-page-header [title]="countryName" [linkHome]="true" />
+<app-stat-card-list [statList]="statList" />
+
+<!-- Line diagram: medals per game -->
+<div class="container">
+  <canvas
+    baseChart
+    [data]="chartData"
+    [options]="lineChartOptions"
+    [type]="'line'"
+  ></canvas>
+</div>

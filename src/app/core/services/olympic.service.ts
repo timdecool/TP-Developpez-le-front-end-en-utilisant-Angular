@@ -56,12 +56,12 @@ export class OlympicService {
     )
   }
 
-  public countryIdByIndex(index: number) {
+  public countryIdByIndex(index: number): number {
     return this._olympics$.value[index]?.id || 0;
   }
 
-  public getCountryById(id: number) {
-    return this._olympics$.value.find((olympic: Olympic) => olympic.id === id);
+  public getCountryById(id: number): Olympic|undefined {
+    return this._olympics$.value?.find((olympic: Olympic) => olympic.id === id);
   }
 
   public getNumberOfParticipationsByCountry(id: number): number {
@@ -89,7 +89,4 @@ export class OlympicService {
   public getParticipationYearsByCountry(id: number): number[] {
     return this.getCountryById(id)?.participations.map((participation:Participation): number => participation.year) || [];
   }
-
-
-
 }
