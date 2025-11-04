@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {ChartConfiguration, ChartData} from "chart.js";
 import {Subject, takeUntil} from "rxjs";
 import {tap} from "rxjs/operators";
@@ -14,7 +14,7 @@ import {BaseChartDirective} from "ng2-charts";
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit, OnDestroy {
   olympicService = inject(OlympicService);
   route = inject(ActivatedRoute);
   router = inject(Router);

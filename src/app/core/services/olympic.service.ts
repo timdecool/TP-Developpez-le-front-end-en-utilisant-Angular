@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {inject, Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Participation } from "../models/Participation";
 import {Olympic} from "../models/Olympic";
@@ -9,40 +9,38 @@ import {Olympic} from "../models/Olympic";
   providedIn: 'root',
 })
 export class OlympicService {
+  private http = inject(HttpClient)
   private olympicUrl = './assets/mock/olympic.json';
-  private _olympics$ = new BehaviorSubject<any>(undefined);
 
-  constructor(private http: HttpClient) {}
+  private _olympics$ = new BehaviorSubject<Olympic[]>([]);
 
-  loadInitialData() {
+  loadInitialData(): Observable<Olympic[]> {
     return this.http.get<any>(this.olympicUrl).pipe(
-      tap((value) => this._olympics$.next(value)),
-      catchError((error, caught) => {
-        // TODO: improve error handling
+      tap((value: Olympic[]) => this._olympics$.next(value)),
+      catchError((error, caught): Observable<Olympic[]> => {
         console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
-        this._olympics$.next(null);
+        this._olympics$.next([]);
         return caught;
       })
     );
   }
 
-  get olympics() {
+  get olympics(): Observable<Olympic[]> {
     return this._olympics$.asObservable();
   }
 
   public getNumberOfGames(): number {
     const gameYears : number[] = [];
     this._olympics$.value?.forEach(
-      (olympic: Olympic) => olympic.participations.forEach(
-        (participation: Participation) => gameYears.push(participation.year)
+      (olympic: Olympic): void => olympic.participations.forEach(
+        (participation: Participation): number => gameYears.push(participation.year)
       )
     )
     return new Set(gameYears).size;
   }
 
   public getCountries(): string[] {
-    return this._olympics$.value?.map((olympic: Olympic) => olympic.country);
+    return this._olympics$.value?.map((olympic: Olympic): string => olympic.country);
   }
 
   public getNumberOfCountries(): number {
@@ -51,8 +49,8 @@ export class OlympicService {
 
   public getMedals(): number[] {
     return this._olympics$.value?.map(
-      (olympic: Olympic) => olympic.participations.reduce(
-        (sum: number, participation: Participation) => sum + participation.medalsCount, 0)
+      (olympic: Olympic): number => olympic.participations.reduce(
+        (sum: number, participation: Participation): number => sum + participation.medalsCount, 0)
     )
   }
 
@@ -61,7 +59,7 @@ export class OlympicService {
   }
 
   public getCountryById(id: number): Olympic|undefined {
-    return this._olympics$.value?.find((olympic: Olympic) => olympic.id === id);
+    return this._olympics$.value?.find((olympic: Olympic): boolean => olympic.id === id);
   }
 
   public getNumberOfParticipationsByCountry(id: number): number {
