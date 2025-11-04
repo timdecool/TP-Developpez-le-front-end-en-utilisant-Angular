@@ -1,29 +1,31 @@
-# OlympicGamesStarter
+![Angular 18.0.3](https://img.shields.io/badge/Angular_CLI-18.0.3-blue)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+# Développez le front-end en utilisant Angular : OlympicGames 
 
-Don't forget to install your node_modules before starting (`npm install`).
+**Auteur** : Timothé DECOOL
 
-## Development server
+**Contexte :** Projet réalisé dans le cadre de la formation "Développeur Full-Stack - Java et Angular" sur OpenClassrooms.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Lancer l'application
+Avant de lancer l'application, ne pas oublier d'installer les modules requis avec `npm install`.
+Utiliser `ng serve` pour lancer un serveur de développement. 
+L'application sera disponible en navigant à l'adresse suivante : `http://localhost:4200/`.
 
-## Build
+## Architecture de l'application
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Composants réutilisables
+Regroupés dans le dossier `components`, des composants ont la responsabilité d'encapsuler une logique d'affichage d'éléments récurrents de l'application.
+Cela comprend :
+- `PageHeader` pour l'affichage des titres des pages de l'application ;
+- `StatCard` et `StartCardList` pour l'affichage en liste des cartes de statistiques sur les page d'accueil et de détails pays ;
+- `ErrorBanner` encapsule la logique d'affichage d'un message d'erreur le cas échéant.
 
-## Where to start
+### Composants de page
+Les composants de page, dans le dossier `pages`, ont la charge de structurer les données à fournir aux composants enfants. Les templates organisent les composants enfants.
+- `HomeComponent` pour la page de Dashboard ;
+- `DetailsComponent` pour la page des détails sur un pays spécifique ;
+- `NotFoundComponent` est une page de fallback en cas de recherche d'une adresse non inscrite dans le routing de l'application.
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+### Services
+`OlympicService` encapsule la logique d'accès aux données et de restitution de ces données aux autres composants de l'application.
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
-
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
-
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
-
-You're now ready to implement the requested features.
-
-Good luck!
