@@ -4,6 +4,7 @@
   --primary: #04838f;
   --text: black;
   --text-light: #757575;
+  --danger: #b60404;
 }
 
 html, body {
@@ -29,4 +30,6 @@ html, body {
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 5px;
+  box-sizing: border-box;
 }
