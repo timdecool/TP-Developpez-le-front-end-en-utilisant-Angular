@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Participation } from "../models/Participation";
 import {Olympic} from "../models/Olympic";
-import {Participation} from "../models/Participation";
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +52,7 @@ export class OlympicService {
   public getMedals(): number[] {
     return this._olympics$.value.map(
       (olympic: Olympic) => olympic.participations.reduce(
-        (sum, participation) => sum + participation.medalsCount, 0)
+        (sum: number, participation: Participation) => sum + participation.medalsCount, 0)
     )
   }
 
