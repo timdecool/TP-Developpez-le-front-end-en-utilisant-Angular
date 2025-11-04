@@ -9,10 +9,11 @@ import {BaseChartDirective, provideCharts, withDefaultRegisterables} from 'ng2-c
 import {StatCardListComponent} from "./components/stat-card-list/stat-card-list.component";
 import {PageHeaderComponent} from "./components/page-header/page-header.component";
 import {DetailsComponent} from "./pages/details/details.component";
+import {ErrorBannerComponent} from "./components/error-banner/error-banner.component";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, DetailsComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BaseChartDirective, StatCardListComponent, PageHeaderComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BaseChartDirective, StatCardListComponent, PageHeaderComponent, ErrorBannerComponent],
   providers: [
     provideCharts(withDefaultRegisterables())
   ],

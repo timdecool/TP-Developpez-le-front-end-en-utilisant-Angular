@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Participation } from "../models/Participation";
 import {Olympic} from "../models/Olympic";
@@ -13,20 +13,26 @@ export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
 
   private _olympics$ = new BehaviorSubject<Olympic[]>([]);
+  private _errorMessage$ = new BehaviorSubject<string|null>(null);
 
   loadInitialData(): Observable<Olympic[]> {
     return this.http.get<any>(this.olympicUrl).pipe(
       tap((value: Olympic[]) => this._olympics$.next(value)),
       catchError((error, caught): Observable<Olympic[]> => {
-        console.error(error);
+        const msg = error.status === 404 ? 'les données sont introuvables.':`erreur inconnue (${error.status}).`
+        this._errorMessage$.next(msg);
         this._olympics$.next([]);
-        return caught;
+        return of([]);
       })
     );
   }
 
   get olympics(): Observable<Olympic[]> {
     return this._olympics$.asObservable();
+  }
+
+  get errorMessage(): Observable<string|null> {
+    return this._errorMessage$.asObservable();
   }
 
   public getNumberOfGames(): number {
