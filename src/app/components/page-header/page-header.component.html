@@ -1,6 +1,8 @@
-<header>
-  <h1 class="title">{{ title() }}</h1>
-  @if(linkHome()) {
-    <a [routerLink]="['']">Back to dashboard</a>
-  }
-</header>
+@if(title()) {
+  <header>
+    <h1 class="title">{{ title() }}</h1>
+    @if(linkHome()) {
+      <a [routerLink]="['']">Back to dashboard</a>
+    }
+  </header>
+}
