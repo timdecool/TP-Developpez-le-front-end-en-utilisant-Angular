@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   private updateStats(): void {

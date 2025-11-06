@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, timeout} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Participation } from "../models/Participation";
 import {Olympic} from "../models/Olympic";
@@ -17,7 +17,14 @@ export class OlympicService {
 
   loadInitialData(): Observable<Olympic[]> {
     return this.http.get<any>(this.olympicUrl).pipe(
-      tap((value: Olympic[]) => this._olympics$.next(value)),
+      tap((value: Olympic[]) => {
+        this._olympics$.next(value)
+        // setTimeout(
+        //   () => this._olympics$.next(value),
+        //   3000
+        // )
+      }
+      ),
       catchError((error, caught): Observable<Olympic[]> => {
         const msg = error.status === 404 ? 'les données sont introuvables.':`erreur inconnue (${error.status}).`
         this._errorMessage$.next(msg);
